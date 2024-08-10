@@ -1,0 +1,65 @@
+body {
+    font-size: clamp(8px, 2vw, 16px);
+}
+
+.table-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.citation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: inherit;
+    min-width: 300px;
+}
+
+.citation-table thead tr {
+    background-color: #ffffff;
+    color: #000000;
+    text-align: left;
+    font-weight: bold;
+}
+
+.citation-table th, .citation-table td {
+    padding: 12px 15px;
+}
+
+.citation-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.citation-table tbody tr:nth-of-type(odd) {
+    background-color: #f3f3f3;
+}
+
+.citation-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.citation-table a {
+    color: #009879;
+    text-decoration: none;
+}
+
+.citation-table a:hover {
+    text-decoration: underline;
+}
+
+th {
+    cursor: pointer;
+}
+
+/* Underline the hovered author name */
+.underline {
+    text-decoration: underline;
+}
+
+.author {
+    white-space: nowrap;
+}
+
+.author-bold {
+    font-weight: bold;
+}
