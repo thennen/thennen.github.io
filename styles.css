@@ -2,6 +2,11 @@ body {
     font-size: clamp(8px, 2vw, 16px);
 }
 
+a {
+    color: #009879;
+    text-decoration: none;
+}
+
 .table-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -23,7 +28,7 @@ body {
 }
 
 .citation-table th, .citation-table td {
-    padding: 12px 15px;
+    padding: 8px 8px;
 }
 
 .citation-table tbody tr {
@@ -32,10 +37,6 @@ body {
 
 .citation-table tbody tr:nth-of-type(odd) {
     background-color: #f3f3f3;
-}
-
-.citation-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
 }
 
 .citation-table a {

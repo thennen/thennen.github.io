@@ -13,6 +13,26 @@ header = """
 </head>
 <body>
     <div class="table-container">
+
+        <h1>Tyler A. Hennen, Dr.-Ing</h1>
+
+        <table>
+            <tr>
+                <td>Email:</td>
+                <td><a href="mailto:tyler@hennen.us">tyler@hennen.us</a></td>
+            </tr>
+            <tr>
+                <td>GitHub:</td>
+                <td><a href="https://github.com/thennen">github.com/thennen</a></td>
+            </tr>
+            <tr>
+                <td>LinkedIn:</td>
+                <td><a href="https://www.linkedin.com/in/tylerhennen">linkedin.com/in/tylerhennen</a></td>
+            </tr>
+        </table>
+
+        <h2>Publications</h2>
+
         <table class="citation-table" id="citationTable">
             <thead>
                 <tr>
