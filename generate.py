@@ -8,13 +8,13 @@ header = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Tyler Hennen</title>
+    <title>Tyler Hennen, PhD</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="table-container">
 
-        <h1>Tyler A. Hennen</h1>
+        <h1>Tyler Hennen</h1>
 
         <table class="basic-table">
             <tr>
