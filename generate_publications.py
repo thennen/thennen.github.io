@@ -16,7 +16,7 @@ header = """
 
 <h2>Publications</h2>
 
-<a href="">Boring version</a>
+// <a href="">Boring version</a>
 
 <br>
 
