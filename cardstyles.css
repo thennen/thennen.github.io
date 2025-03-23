@@ -8,7 +8,7 @@ body {
 }
 .card {
     width: 90%;
-    max-width: 600px; /* Maximum width for larger screens */
+    max-width: 650px; /* Maximum width for larger screens */
     background: white;
     padding: 15px;
     border-radius: 10px;
@@ -17,6 +17,11 @@ body {
     gap: 20px;
     margin-bottom: 20px;
     overflow: hidden; /* Ensure content does not overflow */
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Keeps the text color the same */
+}
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .card img {
     width: 200px; /* Fixed width for larger screens */
@@ -46,6 +51,7 @@ body {
     margin-top: auto; /* Push date to bottom */
 }
 .links {
+    color: inherit;
     margin-top: 8px;
     display: flex;
     flex-wrap: wrap; /* Allow links to wrap on smaller screens */
@@ -81,7 +87,7 @@ body {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 568px) {
     .card {
         flex-direction: column; /* Stack cards on smaller screens */
     }

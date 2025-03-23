@@ -16,7 +16,7 @@ header = """
 
 <h2>Publications</h2>
 
-// <a href="">Boring version</a>
+<!-- <a href="">Boring version</a> -->
 
 <br>
 
@@ -67,6 +67,7 @@ def bibtex_entry_to_html(entry):
     authorlist = ', '.join([' '.join(author.split(', ')[::-1]) for author in authorstring.split(' and ')])
     authorlist = bibtex_text_to_html(authorlist)
     authorlist = authorlist.replace("Tyler Hennen", "<strong>Tyler Hennen</strong>")
+    authorlist = authorlist.replace(' ', '&nbsp;').replace('-', '&#8209;').replace(',&nbsp;', ', ')
     doi = entry.get('doi', '')
     
     annotation = entry.get('annotation')
@@ -108,30 +109,27 @@ def bibtex_entry_to_html(entry):
     img_fn = doi if doi else arxiv
     img_fn = img_fn.replace('/', '_')
 
+
     if doi:
-        img_a = f'<a href="https://doi.org/{doi}", target="_blank" rel="noopener noreferrer">'
+        url = f"https://doi.org/{doi}"
     elif arxiv:
-        img_a = f'<a href="https://arxiv.org/abs/{arxiv}", target="_blank" rel="noopener noreferrer">'
+        url = f"https://arxiv.org/abs/<arxiv>"
+
 
     # dumb 
     title = title.replace('Ns', 'ns')
 
 
     return f"""
-                <div class="card">
-                    {img_a}
-                        <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
-                    </a>
+                    <a href="{url}", target="_blank" rel="noopener noreferrer" class="card">
+                    <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
                     <div class="card-content">
                         <h3>{title}</h3>
                         <p>{authorlist}</p>
                         <p><em>{publisher}</em>{open_access}</p>
                         <p class="publication-date">{month} {year}</p>
-                        <div class="links">
-                            {links}
-                        </div>
                     </div>
-                </div>
+                    </a>
     """
 
 
