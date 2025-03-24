@@ -8,7 +8,7 @@ body {
 }
 .card {
     width: 90%;
-    max-width: 650px; /* Maximum width for larger screens */
+    max-width: 800px; /* Maximum width for larger screens */
     background: white;
     padding: 15px;
     border-radius: 10px;
@@ -24,8 +24,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .card img {
-    width: 200px; /* Fixed width for larger screens */
-    height: 200px; /* Fixed height for larger screens */
+    width: 220px; /* Fixed width for larger screens */
+    height: 220px; /* Fixed height for larger screens */
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0; /* Prevent image from shrinking */
