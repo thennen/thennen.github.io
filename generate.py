@@ -6,6 +6,15 @@ header = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLBK1VQJ2J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DLBK1VQJ2J');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyler Hennen, PhD</title>
@@ -14,12 +23,12 @@ header = """
 <body>
     <div class="table-container">
 
-        <h1>Tyler Hennen</h1>
+        <h1>Tyler A. Hennen</h1>
 
         <table class="basic-table">
             <tr>
                 <td>Email:</td>
-                <td><a href="mailto:tyler@hennen.us">tyler@hennen.us</a></td>
+                <td><a href="mailto:tyler@hennen.us">tyler@hennen.us</a> <a href="publickey.tyler@hennen.us.asc">[PGP]</a></td>
             </tr>
             <tr>
                 <td>GitHub:</td>
