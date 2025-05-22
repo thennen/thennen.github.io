@@ -82,7 +82,7 @@ header = """
             </tr>
             <tr>
                 <td>2009</td>
-                <td>Edmond G. Franklin Scholarship in Physics</td>
+                <td>Edmond B. Franklin Scholarship in Physics</td>
             </tr>
             <tr>
                 <td>2008</td>
