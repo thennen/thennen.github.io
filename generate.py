@@ -28,7 +28,7 @@ header = """
         <table class="basic-table">
             <tr>
                 <td>Email:</td>
-                <td><a href="mailto:tyler@hennen.us">tyler@hennen.us</a> <a href="publickey.tyler@hennen.us.asc">[PGP]</a></td>
+                <td><a href="mailto:tyler@hennen.us">tyler@hennen.us</a> &nbsp;&nbsp; <a href="publickey.tyler@hennen.us.asc">[PGP key]</a></td>
             </tr>
             <tr>
                 <td>GitHub:</td>
@@ -38,8 +38,15 @@ header = """
                 <td>LinkedIn:</td>
                 <td><a href="https://www.linkedin.com/in/tylerhennen">linkedin.com/in/tylerhennen</a></td>
             </tr>
+            <tr>
+                <td>Publications:</td>
+                <td><a href="publications.html">hennen.us/publications</a></td>
+            </tr>
         </table>
 
+"""[1:]
+
+"""
         <h2>Education</h2>
 
         <table class="basic-table">
@@ -111,6 +118,9 @@ footer = """
         </table>
     </div>
     <script src="scripts.js"></script>
+"""
+
+footer = """
 </body>
 </html>
 """
@@ -185,6 +195,6 @@ def bibtex_entry_to_html(entry):
 if __name__ == '__main__':
     with open('index.html', 'w', encoding='utf-8') as f:
         f.writelines(header)
-        for entry in entries:
-            f.writelines(bibtex_entry_to_html(entry))
-        f.writelines(footer)
+        #for entry in entries:
+        #    f.writelines(bibtex_entry_to_html(entry))
+        #f.writelines(footer)

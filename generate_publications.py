@@ -83,6 +83,7 @@ def bibtex_entry_to_html(entry):
     authorlist = authorlist.replace("Tyler Hennen", "<strong>Tyler Hennen</strong>")
     authorlist = authorlist.replace(' ', '&nbsp;').replace('-', '&#8209;').replace(',&nbsp;', ', ')
     doi = entry.get('doi', '')
+
     
     annotation = entry.get('annotation')
     if annotation and 'Open-access' in annotation: # Just some thing I did in Zotero to mark it manually
@@ -92,12 +93,23 @@ def bibtex_entry_to_html(entry):
 
     title = bibtex_text_to_html(entry.get('title', ''))
 
+    # papers that also have arxiv versions (Hard-coded)
     if doi == '10.1063/5.0080532':
         arxiv = '2112.00192'
     elif doi == '10.1063/5.0047571':
         arxiv = '2102.05770'
     else:
         arxiv = entry.get('eprint', '')
+
+    # Full-text available somewhere online
+    # Not sure if I should be linking them
+    if doi == 'ISCAS45731.2020.9181105':
+        bootleg_url = "https://confcats-event-sessions.s3.amazonaws.com/iscas20/papers/1836.pdf"
+    else:
+        bootleg_url = ''
+
+    doi_url = f"https://doi.org/{doi}"
+    arxiv_url = f"https://arxiv.org/abs/{arxiv}"
 
     entry_type = entry.get('ENTRYTYPE')
     if entry_type == 'article':
@@ -111,28 +123,41 @@ def bibtex_entry_to_html(entry):
 
     publisher = bibtex_text_to_html(publisher)
 
+    if publisher == 'Arxiv':
+        publisher = 'arXiv'
+
     year = entry.get('year', '')
     month = entry.get('month', '')
-
-    links = ''
-    if doi:
-        links += f'<a href="https://doi.org/{doi}", target="_blank" rel="noopener noreferrer" class="journal-link">link</a>'
-    if arxiv:
-        links += f'<a href="https://arxiv.org/abs/{arxiv}", target="_blank" rel="noopener noreferrer" class="arxiv">arXiv</a>'
 
     img_fn = doi if doi else arxiv
     img_fn = img_fn.replace('/', '_')
 
-
     if doi:
-        url = f"https://doi.org/{doi}"
+        url = doi_url
     elif arxiv:
-        url = f"https://arxiv.org/abs/<arxiv>"
+        url = arxiv_url
 
+    if doi and arxiv:
+        secondary_link = f'<p><em><a href="{arxiv_url}" target="_blank" rel="noopener noreferrer" class="secondary-link">arXiv version</a></em></p>'
+    else:
+        secondary_link = ''
 
     # dumb 
     title = title.replace('Ns', 'ns')
 
+    return f"""
+                    <div class="card">
+                    <a href="{url}" target="_blank" rel="noopener noreferrer" class="card-link"></a>
+                    
+                    <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
+                    <div class="card-content">
+                        <h3>{title}</h3>
+                        <p>{authorlist}</p>
+                        <p><em>{publisher}</em>{open_access}</p>{secondary_link}
+                        <p class="publication-date">{month} {year}</p>
+                    </div>
+                    </div>
+    """
 
     return f"""
                     <a href="{url}", target="_blank" rel="noopener noreferrer" class="card">

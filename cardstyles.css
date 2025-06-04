@@ -7,6 +7,7 @@ body {
     align-items: center;
 }
 .card {
+    position: relative;
     width: 90%;
     max-width: 800px; /* Maximum width for larger screens */
     background: white;
@@ -20,8 +21,15 @@ body {
     text-decoration: none; /* Removes underline */
     color: inherit; /* Keeps the text color the same */
 }
+.card-link {
+    position: absolute;
+    inset: 0; /* top: 0; right: 0; bottom: 0; left: 0; shorthand */
+    z-index: 1;
+    text-decoration: none;
+    color: inherit;
+}
 .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .card img {
     width: 220px; /* Fixed width for larger screens */
@@ -44,6 +52,12 @@ body {
     font-size: 14px;
     color: #343434;
     margin: 2px 0;
+}
+.secondary-link {
+    position: relative;
+    z-index: 2;
+    text-decoration: underline;
+    color: #28a745;
 }
 .publication-date {
     color: #333;
