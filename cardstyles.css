@@ -61,6 +61,9 @@ body {
     text-decoration: underline;
     color: #28a745;
 }
+.secondary-link:hover {
+    color: #1c7c31; /* Darker green for hover */
+}
 .publication-date {
     color: #333;
     font-weight: bold;
