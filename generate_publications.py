@@ -87,7 +87,7 @@ def bibtex_entry_to_html(entry):
     
     annotation = entry.get('annotation')
     if annotation and 'Open-access' in annotation: # Just some thing I did in Zotero to mark it manually
-        open_access = '<span class="open-access"> (Open Access)</span>'
+        open_access = '<p><span class="open-access">(Open Access)</span></p>'
     else:
         open_access = ''
 
@@ -153,7 +153,7 @@ def bibtex_entry_to_html(entry):
                     <div class="card-content">
                         <h3>{title}</h3>
                         <p>{authorlist}</p>
-                        <p><em>{publisher}</em>{open_access}</p>{secondary_link}
+                        <p><em>{publisher}</em></p>{open_access}{secondary_link}
                         <p class="publication-date">{month} {year}</p>
                     </div>
                     </div>
