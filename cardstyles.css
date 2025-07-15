@@ -32,8 +32,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .card img {
-    width: 220px; /* Fixed width for larger screens */
-    height: 220px; /* Fixed height for larger screens */
+    width: 250px; /* Fixed width for larger screens */
+    height: 250px; /* Fixed height for larger screens */
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0; /* Prevent image from shrinking */
@@ -51,7 +51,8 @@ body {
 .card p {
     font-size: 14px;
     color: #343434;
-    margin: 2px 0;
+    margin: 4px 0;
+
 }
 .secondary-link {
     position: relative;
@@ -105,7 +106,7 @@ body {
     margin-left: 0px;
 }
 
-/* Media query for smaller screens */
+/* --- Media query for smaller screens --- */
 @media (max-width: 568px) {
     .card {
         flex-direction: column; /* Stack cards on smaller screens */
@@ -118,4 +119,68 @@ body {
     .card-content {
         padding: 15px; /* Add padding to content on smaller screens */
     }
+}
+
+/* --- FINAL CORRECTED Styles for Two-Tab Summary --- */
+.summary-container-tabs {
+    position: relative;
+    z-index: 2;
+    margin-top: 15px;
+}
+
+.summary-radio {
+    display: none;
+}
+
+.summary-tabs {
+    display: flex;
+    align-items: baseline;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary-tabs label {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    color: #007bff;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: -1px;
+}
+
+.summary-tabs label:hover {
+    background-color: #f5f5f5;
+}
+
+.summary-panel {
+    display: none; /* Hide all panels by default */
+    padding-top: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* START: This is the corrected, robust logic that does not use IDs */
+/* Show the first panel when the first radio button is checked */
+.summary-container-tabs .summary-radio:first-of-type:checked ~ .summary-panels .summary-panel:first-of-type {
+    display: block;
+}
+
+/* Show the second panel when the second radio button is checked */
+.summary-container-tabs .summary-radio:nth-of-type(2):checked ~ .summary-panels .summary-panel:nth-of-type(2) {
+    display: block;
+}
+
+/* Style the first tab label when the first radio button is checked */
+.summary-container-tabs .summary-radio:first-of-type:checked ~ .summary-tabs label:first-of-type {
+    border-color: #ddd;
+    border-bottom: 1px solid white;
+    color: #333;
+}
+
+/* Style the second tab label when the second radio button is checked */
+.summary-container-tabs .summary-radio:nth-of-type(2):checked ~ .summary-tabs label:nth-of-type(2) {
+    border-color: #ddd;
+    border-bottom: 1px solid white;
+    color: #333;
 }

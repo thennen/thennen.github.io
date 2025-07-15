@@ -1,12 +1,12 @@
 import bibtexparser
 import latexcodec
 import re
+import json
 
 header = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLBK1VQJ2J"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -23,14 +23,12 @@ header = """
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico"> 
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
 
 <h2>Tyler Hennen's Publications</h2>
-
-<!-- <a href="">Boring version/bibtex version?</a> -->
 
 <br>
 
@@ -42,23 +40,23 @@ footer = """
 </html>
 """
 
-
-
-
-with open('bibliography.bib', 'r') as bibtex_file:
+# Load the BibTeX file with UTF-8 encoding
+with open('bibliography.bib', 'r', encoding='utf-8') as bibtex_file:
     bib_database = bibtexparser.load(bibtex_file)
 
+# Load the JSON file with UTF-8 encoding
+with open('publication_summaries.json', 'r', encoding='utf-8') as f:
+    summaries = json.load(f)
+
 entries = bib_database.entries
-# TODO: try to also sort by month
-#entries = sorted(entries, key=lambda x:x.get('year'), reverse=True)
 
 month_order = {"january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
                "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12}
 
 # Sort by year (descending) and month (descending)
 entries = sorted(entries, key=lambda x: (
-    -int(x.get('year', 0)),  # Negative for descending order
-    -month_order.get(x.get('month', '').strip().lower(), 0)  # Negative for descending order
+    -int(x.get('year', 0)),
+    -month_order.get(x.get('month', '').strip().lower(), 0)
 ))
 
 def bibtex_text_to_html(bibtex_title: str) -> str:
@@ -75,8 +73,7 @@ def bibtex_text_to_html(bibtex_title: str) -> str:
     html_title = re.sub(r'\$([^\$]+)\$', r'<i>\1</i>', html_title)
     return html_title
 
-def bibtex_entry_to_html(entry):
-    # Create an HTML row for the entry
+def bibtex_entry_to_html(entry, summaries_data):
     authorstring = entry.get('author', '')
     authorlist = ', '.join([' '.join(author.split(', ')[::-1]) for author in authorstring.split(' and ')])
     authorlist = bibtex_text_to_html(authorlist)
@@ -84,29 +81,18 @@ def bibtex_entry_to_html(entry):
     authorlist = authorlist.replace(' ', '&nbsp;').replace('-', '&#8209;').replace(',&nbsp;', ', ')
     doi = entry.get('doi', '')
 
-    
     annotation = entry.get('annotation')
-    if annotation and 'Open-access' in annotation: # Just some thing I did in Zotero to mark it manually
-        open_access = '<p><span class="open-access">(Open Access)</span></p>'
-    else:
-        open_access = ''
+    open_access = '<p><span class="open-access">(Open Access)</span></p>' if annotation and 'Open-access' in annotation else ''
 
     title = bibtex_text_to_html(entry.get('title', ''))
+    title = title.replace('Ns', 'ns')
 
-    # papers that also have arxiv versions (Hard-coded)
     if doi == '10.1063/5.0080532':
         arxiv = '2112.00192'
     elif doi == '10.1063/5.0047571':
         arxiv = '2102.05770'
     else:
         arxiv = entry.get('eprint', '')
-
-    # Full-text available somewhere online
-    # Not sure if I should be linking them
-    if doi == 'ISCAS45731.2020.9181105':
-        bootleg_url = "https://confcats-event-sessions.s3.amazonaws.com/iscas20/papers/1836.pdf"
-    else:
-        bootleg_url = ''
 
     doi_url = f"https://doi.org/{doi}"
     arxiv_url = f"https://arxiv.org/abs/{arxiv}"
@@ -120,11 +106,8 @@ def bibtex_entry_to_html(entry):
         publisher = 'RWTH Aachen University'
     else:
         publisher = entry.get('publisher', '')
-
     publisher = bibtex_text_to_html(publisher)
-
-    if publisher == 'Arxiv':
-        publisher = 'arXiv'
+    publisher = 'arXiv' if publisher == 'Arxiv' else publisher
 
     year = entry.get('year', '')
     month = entry.get('month', '')
@@ -132,49 +115,63 @@ def bibtex_entry_to_html(entry):
     img_fn = doi if doi else arxiv
     img_fn = img_fn.replace('/', '_')
 
-    if doi:
-        url = doi_url
-    elif arxiv:
-        url = arxiv_url
+    doi_is_arxiv = 'arxiv' in doi.lower()
 
-    if doi and arxiv:
+    url = doi_url if doi else arxiv_url
+
+    if (doi and arxiv) and not doi_is_arxiv:
         secondary_link = f'<p><em><a href="{arxiv_url}" target="_blank" rel="noopener noreferrer" class="secondary-link">arXiv version</a></em></p>'
     else:
         secondary_link = ''
 
-    # dumb 
-    title = title.replace('Ns', 'ns')
+    # --- Generate Summary HTML Block ---
+    summary_data = summaries_data.get(doi, {})
+    simple_summary = summary_data.get('simple_summary', '')
+    detailed_summary = summary_data.get('detailed_summary', '')
+    summary_html = ""
+
+    if simple_summary and detailed_summary:
+        # Sanitize DOI for use in HTML attributes
+        safe_doi = doi.replace('.', '_').replace('/', '_')
+        radio_name = f"summary-level-{safe_doi}"
+
+        summary_html = f"""
+                        <div class="summary-container-tabs">
+                            <input type="radio" name="{radio_name}" id="s-radio-1-{safe_doi}" class="summary-radio" checked>
+                            <input type="radio" name="{radio_name}" id="s-radio-2-{safe_doi}" class="summary-radio">
+                            <div class="summary-tabs">
+                                <label for="s-radio-1-{safe_doi}">Short summary</label>
+                                <label for="s-radio-2-{safe_doi}">Long summary</label>
+                            </div>
+                            <div class="summary-panels">
+                                <div id="panel-1-{safe_doi}" class="summary-panel">
+                                    {simple_summary}
+                                </div>
+                                <div id="panel-2-{safe_doi}" class="summary-panel">
+                                    {detailed_summary}
+                                </div>
+                            </div>
+                        </div>
+                        """
 
     return f"""
                     <div class="card">
-                    <a href="{url}" target="_blank" rel="noopener noreferrer" class="card-link"></a>
-                    
-                    <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
-                    <div class="card-content">
-                        <h3>{title}</h3>
-                        <p>{authorlist}</p>
-                        <p><em>{publisher}</em></p>{open_access}{secondary_link}
-                        <p class="publication-date">{month} {year}</p>
-                    </div>
+                        <a href="{url}" target="_blank" rel="noopener noreferrer" class="card-link"></a>
+                        <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
+                        <div class="card-content">
+                            <h3>{title}</h3>
+                            <p>{authorlist}</p>
+                            <p><em>{publisher}</em></p>{open_access}{secondary_link}
+                            <p class="publication-date">{month} {year}</p>
+                            {summary_html}
+                        </div>
                     </div>
     """
-
-    return f"""
-                    <a href="{url}", target="_blank" rel="noopener noreferrer" class="card">
-                    <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
-                    <div class="card-content">
-                        <h3>{title}</h3>
-                        <p>{authorlist}</p>
-                        <p><em>{publisher}</em>{open_access}</p>
-                        <p class="publication-date">{month} {year}</p>
-                    </div>
-                    </a>
-    """
-
 
 if __name__ == '__main__':
     with open('publications.html', 'w', encoding='utf-8') as f:
         f.writelines(header)
         for entry in entries:
-            f.writelines(bibtex_entry_to_html(entry))
+            # Pass the summaries dictionary to the function
+            f.writelines(bibtex_entry_to_html(entry, summaries))
         f.writelines(footer)
