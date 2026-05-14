@@ -106,6 +106,55 @@ body {
     margin-left: 0px;
 }
 
+.filter-panel {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#filter-all,
+#filter-first-author {
+    display: none;
+}
+
+.filter-panel label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border: 1px solid #007bff;
+    border-radius: 999px;
+    background: white;
+    color: #007bff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+#filter-all:checked ~ .filter-panel label[for="filter-all"],
+#filter-first-author:checked ~ .filter-panel label[for="filter-first-author"] {
+    background: #007bff;
+    color: white;
+}
+
+.publications-container .card {
+    display: flex;
+}
+
+#filter-all:checked ~ .publications-container .card {
+    display: flex;
+}
+
+#filter-first-author:checked ~ .publications-container .card {
+    display: none;
+}
+
+#filter-first-author:checked ~ .publications-container .card[data-first-author="true"] {
+    display: flex;
+}
+
 /* --- Media query for smaller screens --- */
 @media (max-width: 568px) {
     .card {

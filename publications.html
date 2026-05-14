@@ -23,10 +23,18 @@
 
 <h2>Tyler Hennen's Publications</h2>
 
-<br>
+<input type="radio" id="filter-all" name="publication-filter" checked>
+<input type="radio" id="filter-first-author" name="publication-filter">
+
+<div class="filter-panel">
+    <label for="filter-all">All</label>
+    <label for="filter-first-author">First author</label>
+</div>
+
+<div class="publications-container">
 
 
-                    <div class="card">
+                    <div class="card" data-first-author="true">
                         <a href="https://doi.org/10.1109/TED.2024.3427616" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1109_TED.2024.3427616.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -55,7 +63,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1063/5.0214036" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1063_5.0214036.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -84,7 +92,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1002/apxr.202400040" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1002_apxr.202400040.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -113,7 +121,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1039/D3NH00520H" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1039_D3NH00520H.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -142,7 +150,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1002/pssa.202300405" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1002_pssa.202300405.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -171,7 +179,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="true">
                         <a href="https://doi.org/10.18154/RWTH-2023-07044" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.18154_RWTH-2023-07044.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -200,7 +208,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1109/IMW56887.2023.10145947" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1109_IMW56887.2023.10145947.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -229,7 +237,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1002/apxr.202200008" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1002_apxr.202200008.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -258,7 +266,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="true">
                         <a href="https://doi.org/10.3389/fnins.2022.941753" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.3389_fnins.2022.941753.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -287,7 +295,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1016/j.simpa.2022.100301" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1016_j.simpa.2022.100301.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -316,7 +324,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="true">
                         <a href="https://doi.org/10.1063/5.0080532" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1063_5.0080532.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -345,7 +353,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.48550/arXiv.2105.05093" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.48550_arXiv.2105.05093.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -374,7 +382,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="true">
                         <a href="https://doi.org/10.1063/5.0047571" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1063_5.0047571.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -403,7 +411,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1109/ISCAS45731.2020.9181105" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1109_ISCAS45731.2020.9181105.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -432,7 +440,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1103/PhysRevB.102.035307" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1103_PhysRevB.102.035307.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -461,7 +469,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1063/5.0003840" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1063_5.0003840.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -490,7 +498,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="true">
                         <a href="https://doi.org/10.1109/IMW.2019.8739556" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1109_IMW.2019.8739556.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -519,7 +527,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="true">
                         <a href="https://doi.org/10.1109/IEDM.2018.8614618" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1109_IEDM.2018.8614618.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -548,7 +556,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1039/C8FD00116B" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1039_C8FD00116B.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -577,7 +585,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1063/1.4896667" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1063_1.4896667.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -606,7 +614,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1063/1.4896982" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1063_1.4896982.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -635,7 +643,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1063/1.4866236" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1063_1.4866236.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -664,7 +672,7 @@
                         </div>
                     </div>
     
-                    <div class="card">
+                    <div class="card" data-first-author="false">
                         <a href="https://doi.org/10.1109/TMAG.2012.2196267" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/10.1109_TMAG.2012.2196267.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
@@ -693,5 +701,6 @@
                         </div>
                     </div>
     
+</div>
 </body>
 </html>

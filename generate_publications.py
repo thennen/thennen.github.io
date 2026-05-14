@@ -29,12 +29,21 @@ header = """
 
 <h2>Tyler Hennen's Publications</h2>
 
-<br>
+<input type="radio" id="filter-all" name="publication-filter" checked>
+<input type="radio" id="filter-first-author" name="publication-filter">
+
+<div class="filter-panel">
+    <label for="filter-all">All</label>
+    <label for="filter-first-author">First author</label>
+</div>
+
+<div class="publications-container">
 
 """[1:]
 
 
 footer = """
+</div>
 </body>
 </html>
 """
@@ -74,6 +83,13 @@ def bibtex_text_to_html(bibtex_title: str) -> str:
 
 def bibtex_entry_to_html(entry, summaries_data):
     authorstring = entry.get('author', '')
+    first_author_raw = authorstring.split(' and ')[0].strip()
+    if ',' in first_author_raw:
+        first_author_name = ' '.join(first_author_raw.split(', ')[::-1])
+    else:
+        first_author_name = first_author_raw
+    first_author_attr = 'data-first-author="true"' if first_author_name == 'Tyler Hennen' else 'data-first-author="false"'
+
     authorlist = ', '.join([' '.join(author.split(', ')[::-1]) for author in authorstring.split(' and ')])
     authorlist = bibtex_text_to_html(authorlist)
     authorlist = authorlist.replace("Tyler Hennen", "<strong>Tyler Hennen</strong>")
@@ -154,7 +170,7 @@ def bibtex_entry_to_html(entry, summaries_data):
                         """
 
     return f"""
-                    <div class="card">
+                    <div class="card" {first_author_attr}>
                         <a href="{url}" target="_blank" rel="noopener noreferrer" class="card-link"></a>
                         <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
                         <div class="card-content">
