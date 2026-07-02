@@ -28,6 +28,7 @@ header = """
 <body>
 
 <h2>Tyler Hennen's Publications</h2>
+<a class="home-link" href="index.html">&#8592;&nbsp;Home</a>
 
 <input type="radio" id="filter-all" name="publication-filter" checked>
 <input type="radio" id="filter-first-author" name="publication-filter">
@@ -101,6 +102,7 @@ def bibtex_entry_to_html(entry, summaries_data):
 
     title = bibtex_text_to_html(entry.get('title', ''))
     title = title.replace('Ns', 'ns')
+    alt_text = re.sub(r'<[^>]+>', '', title).replace('"', '&quot;')
 
     if doi == '10.1063/5.0080532':
         arxiv = '2112.00192'
@@ -172,7 +174,7 @@ def bibtex_entry_to_html(entry, summaries_data):
     return f"""
                     <div class="card" {first_author_attr}>
                         <a href="{url}" target="_blank" rel="noopener noreferrer" class="card-link"></a>
-                        <img src="img/{img_fn}.png" alt="" style="border: none; text-decoration: none;">
+                        <img src="img/{img_fn}.png" alt="{alt_text}" style="border: none; text-decoration: none;">
                         <div class="card-content">
                             <h3>{title}</h3>
                             <p>{authorlist}</p>

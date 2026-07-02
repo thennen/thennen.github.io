@@ -1,71 +1,89 @@
 body {
-    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 a {
-    color: #009879;
+    color: #007bff;
     text-decoration: none;
 }
 
-.table-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+a:hover {
+    text-decoration: underline;
 }
 
-
-.basic-table tr, .basic-table td {
-    padding: 2px 10px;
-}
-
-.citation-table {
+.profile-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 32px 34px;
     width: 100%;
-    border-collapse: collapse;
-    font-size: clamp(8px, 2vw, 16px);
-    min-width: 300px;
+    max-width: 420px;
 }
 
-.citation-table thead tr {
-    background-color: #ffffff;
-    color: #000000;
-    text-align: left;
-    font-weight: bold;
+.profile-card h1 {
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0;
 }
 
-.citation-table th, .citation-table td {
-    padding: 8px 8px;
+.subtitle {
+    font-size: 15px;
+    color: #707070;
+    margin: 5px 0 0;
 }
 
-.citation-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+.profile-card hr {
+    border: none;
+    border-top: 1px solid #eeeeee;
+    margin: 20px 0;
 }
 
-.citation-table tbody tr:nth-of-type(odd) {
-    background-color: #f3f3f3;
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 15px;
 }
 
-.citation-table a {
-    color: #009879;
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-row svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: #9a9a9a;
+}
+
+.contact-value {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pgp {
+    font-size: 12px;
+    color: #8a8a8a;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    padding: 1px 7px;
+}
+
+.pgp:hover {
+    color: #007bff;
+    border-color: #007bff;
     text-decoration: none;
-}
-
-.citation-table a:hover {
-    text-decoration: underline;
-}
-
-th {
-    cursor: pointer;
-}
-
-/* Underline the hovered author name */
-.underline {
-    text-decoration: underline;
-}
-
-.author {
-    white-space: nowrap;
-}
-
-.author-bold {
-    font-weight: bold;
 }
